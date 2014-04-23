@@ -3,6 +3,7 @@
     "moment": {},
     "bootstrap-3": {},
     "bootstrap3-datetimepicker": {},
-    "npm": {}
+    "npm": {},
+    "accounts-ui-bootstrap-3": {}
   }
 }
