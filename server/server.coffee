@@ -1,13 +1,19 @@
 if Meteor.isServer
 
+    Meteor.publish "events", (user) ->
+      Events.find userId: user
+
     Meteor.methods addEvent: (options) ->
+        console.log Meteor.userId()
         Events.insert
+            userId: Meteor.userId()
             timestamp: options.timestamp
             log: options.log
 
         return
 
     Meteor.startup ->
+        ###
         if Events.find().count() is 0
             events = [
                 {
@@ -25,4 +31,5 @@ if Meteor.isServer
                 Events.insert events[i]
                 i++
         return
+        ###
 
