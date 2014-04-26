@@ -14,6 +14,7 @@ if Meteor.isServer
             log: options.log
             verbs: parsed.verbs
             nouns: parsed.nouns
+            tokens: parsed.tokens
 
         return
 
