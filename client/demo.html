@@ -25,10 +25,35 @@
         </div>
     </div>
 
-    <div class="container">
+    <div id="main" class="container">
+
+        {{> eventinput}}
+
+        {{> eventdisplay}}
 
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>
 </body>
+
+<template name="eventdisplay">
+<h2>Events</h2>
+<ul>
+{{#each list}}
+    <li>{{ timestamp }} - {{ log }}</li>
+{{/each}}
+</ul>
+</template>
+
+<template name="eventinput">
+<form id="eventinput" name="">
+    <div class="input-group datetimepicker">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        <input class="set-due-date form-control" type="text" name="timestamp" id="timestamp" />
+    </div>
+    <label for="log">Event</label><input type="text" name="log" id="log" />
+    <br />
+    <button type="submit">Add Event</button>
+</form>
+</template>
