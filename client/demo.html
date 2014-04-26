@@ -27,6 +27,7 @@
 
     <div id="main" class="container">
         {{#if currentUser}}
+            {{> usersms }}
             {{> eventinput}}
             {{> eventdisplay}}
         {{else}}
@@ -45,6 +46,14 @@
     <li>{{ timestamp }} - {{ log }}</li>
 {{/each}}
 </ul>
+</template>
+
+<template name="usersms">
+<form id="usersmsForm" name="">
+    <label for="sms">SMS #</label><input type="text" name="sms" id="sms" />
+    <br />
+    <button type="submit">Add SMS #</button>
+</form>
 </template>
 
 <template name="eventinput">

@@ -1,6 +1,5 @@
 if Meteor.isClient
 
-    console.log Meteor.userId()
     Meteor.subscribe "events", Meteor.userId()
 
     addEvent = (options) ->
@@ -18,3 +17,7 @@ if Meteor.isClient
         addEvent ({timestamp: new Date($("#timestamp").val()), log:$("#log").val()})
         $("#timestamp").val('')
         $("#log").val('')
+
+    Template.usersms.events submit: (e) ->
+        e.preventDefault()
+        Meteor.users.update({_id:Meteor.user()._id}, {$set:{"profile.sms": $("#sms").val()}})

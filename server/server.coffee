@@ -7,9 +7,14 @@ if Meteor.isServer
         userId: user
 
     Meteor.methods addEvent: (options) ->
+
+        options.userId = Meteor.userId() unless "userId" of options
+
+        false  unless options.userId?
+
         parsed = Speak.classify options.log
         Events.insert
-            userId: Meteor.userId()
+            userId: options.userId
             timestamp: options.timestamp
             log: options.log
             verbs: parsed.verbs
@@ -17,6 +22,14 @@ if Meteor.isServer
             tokens: parsed.tokens
 
         return
+
+    Router.map ->
+        @route "apiSMS",
+        path: "/api/sms"
+        where: "server"
+        action: (res) ->
+            User = Meteor.users.findOne({'profile.sms': @request.body.From})
+            Meteor.call "addEvent", {userId: User._id, log: @request.body.Body, timestamp: new Date() } if User
 
     Meteor.startup ->
 
