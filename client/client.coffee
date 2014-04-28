@@ -2,6 +2,20 @@ if Meteor.isClient
 
     Meteor.subscribe "events", Meteor.userId()
 
+    Router.configure layoutTemplate: "layout"
+
+    Router.map ->
+
+        @route "main",
+            path: "/"
+            template: "main"
+
+        @route "about",
+            path: "/about"
+            template: "about"
+
+        return
+
     addEvent = (options) ->
         Meteor.call "addEvent", options
         return
